@@ -214,7 +214,7 @@ void loop()
   }
 
   if (millis() - keep_alive_timer > KEEP_ALIVE_SEND)
-  {                                                   // Отправка KEEP_ALIVE
+  {                                                   // Рассылка KEEP_ALIVE
     for (byte i = 0; i < KeepAliveIpBufferIndex; i++)
     {
       clientIps[i] = KeepAliveIpBuffer[i];
@@ -271,12 +271,12 @@ void loop()
     switch (IR_results.value)
     {
       case 0xF700FF:        // bri ↑
-        diode.setBrightness(diode.getBrightness() + 10);
+        diode.setBrightness(constrain(diode.getBrightness() + 10, 0, 255));
         DBG_PRINTLN("IR: BRI UP");
         break;
 
       case 0xF7807F:        // bri ↓
-        diode.setBrightness(diode.getBrightness() - 10);
+        diode.setBrightness(constrain(diode.getBrightness() - 10, 0, 255));
         DBG_PRINTLN("IR: BRI DOWN");
         break;
 
@@ -355,7 +355,7 @@ void loop()
       case 0xF730CF:        // COL 4
         curMode = 0;
         rgbData[0] = 255;
-        rgbData[1] = 76;
+        rgbData[1] = 52;
         rgbData[2] = 0;
         DBG_PRINTLN("IR: COL 4");
         break;
@@ -430,12 +430,12 @@ void loop()
         break;
 
 
+    
+    }
     updateDataToSend();
       for (int i = 0; i < client_amount; i++)
         udpSend(dataToSend, modeDataArrayLengths[dataToSend[0]] + HEADER_LENGTH, clientIps[i]);
       
-    }
-
     irrecv.resume(); // Receive the next value
   }
 
