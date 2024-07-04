@@ -259,36 +259,36 @@ void loop()
     
   }
 
-  if (eb.click()) 
+  
 
   if (irrecv.decode(&IR_results))
   {                                                   // ИК приём
-    #if DEBUG_EN
-    serialPrintUint64(IR_results.value, HEX); 
-    #endif
-    DBG_PRINTLN("");
+    // #if DEBUG_EN
+    // serialPrintUint64(IR_results.value, HEX); 
+    // #endif
+    // DBG_PRINTLN("");
 
     switch (IR_results.value)
     {
       case 0xF700FF:        // bri ↑
         diode.setBrightness(diode.getBrightness() + 10);
-        DBG_PRINT("IR: BRI UP");
+        DBG_PRINTLN("IR: BRI UP");
         break;
 
       case 0xF7807F:        // bri ↓
         diode.setBrightness(diode.getBrightness() - 10);
-        DBG_PRINT("IR: BRI DOWN");
+        DBG_PRINTLN("IR: BRI DOWN");
         break;
 
       case 0xF740BF:        // ВЫКЛ
         isEnabled = false;
         diode.setRGB(0, 0, 0);
-        DBG_PRINT("IR: ВЫКЛ");
+        DBG_PRINTLN("IR: ВЫКЛ");
         break;
 
       case 0xF7C03F:        // ВКЛ
         isEnabled = true;
-        DBG_PRINT("IR: ВКЛ");
+        DBG_PRINTLN("IR: ВКЛ");
         break;
 
       case 0xF720DF:        // RED
@@ -296,7 +296,7 @@ void loop()
         rgbData[0] = 255;
         rgbData[1] = 0;
         rgbData[2] = 0;
-        DBG_PRINT("IR: RED");
+        DBG_PRINTLN("IR: RED");
         break;
 
       case 0xF7A05F:        // GREEN
@@ -304,7 +304,7 @@ void loop()
         rgbData[0] = 0;
         rgbData[1] = 255;
         rgbData[2] = 0;
-        DBG_PRINT("IR: GREEN");
+        DBG_PRINTLN("IR: GREEN");
         break;
 
       case 0xF7609F:        // BLUE
@@ -312,7 +312,7 @@ void loop()
         rgbData[0] = 0;
         rgbData[1] = 0;
         rgbData[2] = 255;
-        DBG_PRINT("IR: BLUE");
+        DBG_PRINTLN("IR: BLUE");
         break;
 
       case 0xF7E01F:        // WHITE
@@ -320,7 +320,7 @@ void loop()
         rgbData[0] = 255;
         rgbData[1] = 255;
         rgbData[2] = 255;
-        DBG_PRINT("IR: WHITE");
+        DBG_PRINTLN("IR: WHITE");
         break;
       
       case 0xF710EF:        // COL 1
@@ -328,7 +328,7 @@ void loop()
         rgbData[0] = 255;
         rgbData[1] = 24;
         rgbData[2] = 0;
-        DBG_PRINT("IR: COL 1");
+        DBG_PRINTLN("IR: COL 1");
         break;
 
       case 0xF7906F:        // COL 2
@@ -336,7 +336,7 @@ void loop()
         rgbData[0] = 0;
         rgbData[1] = 255;
         rgbData[2] = 43;
-        DBG_PRINT("IR: COL 2");
+        DBG_PRINTLN("IR: COL 2");
         break;
 
       case 0xF750AF:        // COL 3
@@ -344,12 +344,12 @@ void loop()
         rgbData[0] = 0;
         rgbData[1] = 38;
         rgbData[2] = 255;
-        DBG_PRINT("IR: COL 3");
+        DBG_PRINTLN("IR: COL 3");
         break;
 
       case 0xF7D02F:        // FIRE
         curMode = 2;
-        DBG_PRINT("IR: FIRE");
+        DBG_PRINTLN("IR: FIRE");
         break;
 
       case 0xF730CF:        // COL 4
@@ -357,7 +357,7 @@ void loop()
         rgbData[0] = 255;
         rgbData[1] = 76;
         rgbData[2] = 0;
-        DBG_PRINT("IR: COL 4");
+        DBG_PRINTLN("IR: COL 4");
         break;
 
       case 0xF7B04F:        // COL 5
@@ -365,7 +365,7 @@ void loop()
         rgbData[0] = 0;
         rgbData[1] = 255;
         rgbData[2] = 132;
-        DBG_PRINT("IR: COL 5");
+        DBG_PRINTLN("IR: COL 5");
         break;
 
       case 0xF7708F:        // COL 6
@@ -373,7 +373,7 @@ void loop()
         rgbData[0] = 58;
         rgbData[1] = 0;
         rgbData[2] = 255;
-        DBG_PRINT("IR: COL 6");
+        DBG_PRINTLN("IR: COL 6");
         break;
 
       case 0xF708F7:        // COL 7
@@ -381,7 +381,7 @@ void loop()
         rgbData[0] = 255;
         rgbData[1] = 94;
         rgbData[2] = 0;
-        DBG_PRINT("IR: COL 7");
+        DBG_PRINTLN("IR: COL 7");
         break;
 
       case 0xF78877:        // COL 8
@@ -389,7 +389,7 @@ void loop()
         rgbData[0] = 0;
         rgbData[1] = 255;
         rgbData[2] = 193;
-        DBG_PRINT("IR: COL 8");
+        DBG_PRINTLN("IR: COL 8");
         break;
 
       case 0xF748B7:        // COL 9
@@ -397,12 +397,12 @@ void loop()
         rgbData[0] = 130;
         rgbData[1] = 0;
         rgbData[2] = 255;
-        DBG_PRINT("IR: COL 9");
+        DBG_PRINTLN("IR: COL 9");
         break;
 
       case 0xF7C837:        // RAINBOW
         curMode = 1;
-        DBG_PRINT("IR: RAINBOW");
+        DBG_PRINTLN("IR: RAINBOW");
         break;
 
       case 0xF728D7:        // COL 10
@@ -410,7 +410,7 @@ void loop()
         rgbData[0] = 255;
         rgbData[1] = 156;
         rgbData[2] = 0;
-        DBG_PRINT("IR: COL 10");
+        DBG_PRINTLN("IR: COL 10");
         break;
 
       case 0xF7A857:        // COL 11
@@ -418,7 +418,7 @@ void loop()
         rgbData[0] = 0;
         rgbData[1] = 255;
         rgbData[2] = 255;
-        DBG_PRINT("IR: COL 11");
+        DBG_PRINTLN("IR: COL 11");
         break;
 
       case 0xF76897:        // COL 12
@@ -426,7 +426,7 @@ void loop()
         rgbData[0] = 255;
         rgbData[1] = 0;
         rgbData[2] = 33;
-        DBG_PRINT("IR: COL 12");
+        DBG_PRINTLN("IR: COL 12");
         break;
 
 
